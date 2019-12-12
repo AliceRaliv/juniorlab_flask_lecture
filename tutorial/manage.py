@@ -17,7 +17,6 @@ class SeedCommand(Command):
         second_customer = Customer(**{
             'username': 'Customer',
             'email': 'customer@gmail.com',
-            'age': 20,
         })
 
         first_order = Order(**{
