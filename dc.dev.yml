@@ -1,0 +1,37 @@
+version: "3"
+
+networks:
+  tutorial_network:
+    external: true
+
+services:
+  tutorial.flask:
+    container_name: tutorial.flask
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    volumes:
+      - ./tutorial:/app
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST
+      - POSTGRES_DB
+    networks:
+      - tutorial_network
+    ports:
+      - 8080:8080
+
+  tutorial.postgres:
+    container_name: tutorial.postgres
+    image: postgres:12.1
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_HOST
+      - POSTGRES_DB
+    networks:
+      - tutorial_network
+    ports:
+      - 5432:5432
+      
